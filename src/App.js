@@ -1,13 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
+// import Ball from './components/simpleReact/Ball';
+// import BatuseReducer from './components/simpleReact/BatuseReducer';
 import Ball from './components/Ball';
-import BatuseReducer from './components/BatuseReducer';
+import {Provider} from "react-redux"
+import store from "./store"
 
 function App() {
   return (
     <>
-      <Ball/>
-      <BatuseReducer/>
+      {/* <Ball/>
+      <BatuseReducer/> */}
+
+      <Provider store={store}>
+        <Ball/>
+      </Provider>
     </>
     
   );

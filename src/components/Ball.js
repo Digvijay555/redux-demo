@@ -1,36 +1,35 @@
+import React,{useState} from 'react'
+import {connect} from "react-redux";
 
-import React, {  useReducer } from 'react'
-
-function reducer(state, action)
-{
-    switch(action.type){
-        case "increment":
-            return state+1;
-        case "decrement":
-            return state-1;
-        default:
-            console.log("wrong type");
-    }
-}
-function Ball() {
-    // let [balls, setBalls]=useState(10);
-    // const increment=()=>{
-    //     setBalls(balls+1);
-    // }
-
-    // const decrement=()=>{
-    //     setBalls(balls-1);
-    // }
-
-    const [balls, dispatch] = useReducer(reducer,10);
+function Ball(props) {
   return (
     <>
         <h1>Balls</h1>
-        <div>No of Balls:{balls}</div>
-        <button onClick={()=>dispatch({type:"increment"})}>+</button>
-        <button onClick={()=>dispatch({type:"decrement"})}>-</button>
+        <div>No of Balls:{props.balls}</div>
+        <button onClick={props.buyBall}>+</button>
+        <button onClick={props.sellBall}>-</button>
     </>
   )
 }
 
-export default Ball
+// to get your state variable from redux store
+const mapStateToProps = (store) =>{
+    return store;
+}
+
+const mapDispatchtoProps = (dispatch) =>{
+    return{
+        sellBall: ()=>{
+            dispatch({
+                type:"decrement"
+            })
+        },
+        buyBall: ()=>{
+            dispatch({
+                type:"increment"
+            })
+        }
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchtoProps)(Ball);
